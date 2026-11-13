@@ -1,0 +1,301 @@
+<!-- 
+
+
+Nombre (text)
+Validaciones: required, mínimo 2, máximo 30, pattern: solo letras (con tildes y ñ) y espacios.
+Errores: «El nombre es obligatorio», «Mínimo 2 caracteres», «Máximo 30 caracteres», «Solo se permiten letras».
+
+Apellidos (text)
+Validaciones: required, mínimo 2, máximo 50, mismo pattern que Nombre.
+Errores: análogos a Nombre.
+
+Teléfono de contacto (tel)
+Validaciones: required, pattern: 9 dígitos que empiecen por 6, 7, 8 o 9, con prefijo +34 opcional.
+Errores: «El teléfono es obligatorio», «Introduce un teléfono español válido».
+
+Email (email)
+Validaciones: required, email.
+Errores: «El email es obligatorio», «Formato de email no válido».
+
+Nombre de la mascota (text)
+Validaciones: required, mínimo 2, máximo 20, pattern: solo letras, espacios y guiones.
+Errores: «El nombre de la mascota es obligatorio», «Entre 2 y 20 caracteres», «Solo letras, espacios y guiones».
+
+Especie (select: Perro, Gato, Ave, Otro)
+Validaciones: required.
+Errores: «Selecciona una especie».
+
+Sexo (radio: Macho / Hembra)
+Validaciones: required.
+Errores: «Indica el sexo de la mascota».
+
+Raza (text, opcional)
+Validaciones: máximo 40.
+Errores: «Máximo 40 caracteres».
+
+Edad en años (number)
+Validaciones: required, mínimo 0, máximo 30.
+Errores: «La edad es obligatoria», «La edad debe estar entre 0 y 30 años».
+
+Peso en kg (number, admite decimales)
+Validaciones: required, mínimo 0.1, máximo 90.
+Errores: «El peso es obligatorio», «El peso debe estar entre 0,1 y 90 kg».
+
+Número de microchip (text)
+Validaciones: required, pattern: en España sigue la norma internacional ISO 11784/11785 (estándar FDX-B), exactamente 15 dígitos numéricos.
+Errores: «El microchip es obligatorio», «El microchip debe tener exactamente 15 dígitos numéricos».
+
+Contraseña (password)
+Validaciones: required, mínimo 10 y máximo 24, pattern: al menos una mayúscula, una minúscula y un número, sin espacios.
+Errores: un mensaje por cada requisito incumplido.
+
+Motivo de la primera visita (textarea)
+Validaciones: required, mínimo 10, máximo 300.
+Errores: «Describe el motivo de la visita», «Entre 10 y 300 caracteres».
+
+Acepto la política de privacidad (checkbox)
+Validaciones: requiredTrue.
+Errores: «Debes aceptar la política de privacidad».
+
+Quiero recibir recordatorios de vacunas por email (checkbox, opcional)
+Sin validación.
+-->
+
+<form [formGroup]="mascotaForm">
+  <div>
+    <label for="nombre">Nombre</label>
+    <input type="text" formControlName="nombre">
+    @if (mascotaForm.get('nombre')?.invalid && (mascotaForm.get('nombre')?.dirty || mascotaForm.get('nombre')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('nombre')?.hasError('required')) {
+          <div>El nombre es obligatorio</div>
+        }
+        @if (mascotaForm.get('nombre')?.hasError('minlength')) {
+          <div>Mínimo 2 caracteres</div>
+        }
+        @if (mascotaForm.get('nombre')?.hasError('maxlength')) {
+          <div>Máximo 30 caracteres</div>
+        }
+        @if (mascotaForm.get('nombre')?.hasError('pattern')) {
+          <div>Solo se permiten letras</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="apellidos">Apellidos</label>
+    <input type="text" formControlName="apellidos">
+    @if (mascotaForm.get('apellidos')?.invalid && (mascotaForm.get('apellidos')?.dirty || mascotaForm.get('apellidos')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('apellidos')?.hasError('required')) {
+          <div>Los apellidos es obligatorio</div>
+        }
+        @if (mascotaForm.get('apellidos')?.hasError('minlength')) {
+          <div>Mínimo 2 caracteres</div>
+        }
+        @if (mascotaForm.get('apellidos')?.hasError('maxlength')) {
+          <div>Máximo 50 caracteres</div>
+        }
+        @if (mascotaForm.get('apellidos')?.hasError('pattern')) {
+          <div>Solo se permiten letras</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="telefono">Teléfono de contacto</label>
+    <input type="text" formControlName="telefono">
+    @if (mascotaForm.get('telefono')?.invalid && (mascotaForm.get('telefono')?.dirty || mascotaForm.get('telefono')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('telefono')?.hasError('required')) {
+          <div>El teléfono es obligatorio</div>
+        }
+        @if (mascotaForm.get('telefono')?.hasError('pattern')) {
+          <div>Introduce un teléfono español válido</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input type="text" formControlName="email">
+    @if (mascotaForm.get('email')?.invalid && (mascotaForm.get('email')?.dirty || mascotaForm.get('email')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('email')?.hasError('required')) {
+          <div>El email es obligatorio</div>
+        }
+        @if (mascotaForm.get('email')?.hasError('email')) {
+          <div>Formato de email no válido</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="nombreMascota">Nombre de la mascota</label>
+    <input type="text" formControlName="nombreMascota">
+    @if (mascotaForm.get('nombreMascota')?.invalid && (mascotaForm.get('nombreMascota')?.dirty || mascotaForm.get('nombreMascota')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('nombreMascota')?.hasError('required')) {
+          <div>El nombre de la mascota es obligatorio</div>
+        }
+        @if (mascotaForm.get('nombreMascota')?.hasError('minlength')) {
+          <div>Entre 2 y 20 caracteres</div>
+        }
+        @if (mascotaForm.get('nombreMascota')?.hasError('maxlength')) {
+          <div>Entre 2 y 20 caracteres</div>
+        }
+        @if (mascotaForm.get('nombreMascota')?.hasError('pattern')) {
+          <div>Solo letras, espacios y guiones</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="especie">Especie</label>
+    <select formControlName="especie">
+      <option>Perro</option>
+      <option>Gato</option>
+      <option>Ave</option>
+      <option>Otro</option>
+    </select>
+    @if (mascotaForm.get('especie')?.invalid && (mascotaForm.get('especie')?.dirty || mascotaForm.get('especie')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('especie')?.hasError('required')) {
+          <div>Selecciona una especie</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label>Sexo</label>
+    <span>
+      <input id="Macho" type="radio" value="Macho" name="sexo" formControlName="sexo">
+      <label for="Macho">Macho</label>
+    </span>
+    <span>
+      <input id="Hembra" type="radio" value="Hembra" name="sexo" formControlName="sexo">
+      <label for="Hembra">Hembra</label>
+    </span>
+    @if (mascotaForm.get('sexo')?.invalid && (mascotaForm.get('sexo')?.dirty || mascotaForm.get('sexo')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('sexo')?.hasError('required')) {
+          <div>Indica el sexo de la mascota</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="raza">Raza</label>
+    <input type="text" formControlName="raza">
+    @if (mascotaForm.get('raza')?.invalid && (mascotaForm.get('raza')?.dirty || mascotaForm.get('raza')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('raza')?.hasError('maxlength')) {
+          <div>Máximo 40 caracteres</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="edadYears">Edad en años</label>
+    <input type="number" formControlName="edadYears">
+    @if (mascotaForm.get('edadYears')?.invalid && (mascotaForm.get('edadYears')?.dirty || mascotaForm.get('edadYears')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('edadYears')?.hasError('required')) {
+          <div>La edad es obligatoria</div>
+        }
+        @if (mascotaForm.get('edadYears')?.hasError('min')) {
+          <div>La edad debe estar entre 0 y 30 años</div>
+        }
+        @if (mascotaForm.get('edadYears')?.hasError('max')) {
+          <div>La edad debe estar entre 0 y 30 años</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="pesoKg">Peso en kg</label>
+    <input type="number" formControlName="pesoKg">
+    @if (mascotaForm.get('pesoKg')?.invalid && (mascotaForm.get('pesoKg')?.dirty || mascotaForm.get('pesoKg')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('pesoKg')?.hasError('required')) {
+          <div>El peso es obligatorio</div>
+        }
+        @if (mascotaForm.get('pesoKg')?.hasError('min')) {
+          <div>El peso debe estar entre 0,1 y 90 kg</div>
+        }
+        @if (mascotaForm.get('pesoKg')?.hasError('max')) {
+          <div>El peso debe estar entre 0,1 y 90 kg</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="numeroChip">Número de microchip</label>
+    <input type="text" formControlName="numeroChip">
+    @if (mascotaForm.get('numeroChip')?.invalid && (mascotaForm.get('numeroChip')?.dirty || mascotaForm.get('numeroChip')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('numeroChip')?.hasError('required')) {
+          <div>El microchip es obligatorio</div>
+        }
+        @if (mascotaForm.get('numeroChip')?.hasError('pattern')) {
+          <div>El microchip debe tener exactamente 15 dígitos numéricos</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="password">Contraseña</label>
+    <input type="password" formControlName="password">
+    @if (mascotaForm.get('password')?.invalid && (mascotaForm.get('password')?.dirty || mascotaForm.get('password')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('password')?.hasError('required')) {
+          <div>La contraseña es obligatorio</div>
+        }
+        @if (mascotaForm.get('password')?.hasError('minlength')) {
+          <div>Entre 10 y 24 caracteres</div>
+        }
+        @if (mascotaForm.get('password')?.hasError('maxlength')) {
+          <div>Entre 10 y 24 caracteres</div>
+        }
+        @if (mascotaForm.get('password')?.hasError('pattern')) {
+          <div>Al menos una minúscula, una mayúscula y un número, sin espacios</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <label for="apellidos">Motivo de la primera visita</label>
+    <textarea formControlName="apellidos"></textarea>
+    @if (mascotaForm.get('apellidos')?.invalid && (mascotaForm.get('apellidos')?.dirty || mascotaForm.get('apellidos')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('apellidos')?.hasError('required')) {
+          <div>Describe el motivo de la visita</div>
+        }
+        @if (mascotaForm.get('apellidos')?.hasError('minlength')) {
+          <div>Entre 10 y 300 caracteres</div>
+        }
+        @if (mascotaForm.get('apellidos')?.hasError('maxlength')) {
+          <div>Entre 10 y 300 caracteres</div>
+        }
+      </div>
+    }
+  </div>
+  <div>
+    <span>
+      <input type="checkbox" id="politicaPrivacidad" required formControlName="politicaPrivacidad">
+      <label for="politicaPrivacidad">Acepto la política de privacidad</label>
+      @if (mascotaForm.get('politicaPrivacidad')?.invalid && (mascotaForm.get('politicaPrivacidad')?.dirty || mascotaForm.get('politicaPrivacidad')?.touched)) {
+      <div class="alert">
+        @if (mascotaForm.get('politicaPrivacidad')?.hasError('required')) {
+          <div>Debes aceptar la política de privacidad</div>
+        }
+      </div>
+    }
+    </span>
+    <span>
+      <input type="checkbox" id="recordatorios" formControlName="recordatorios">
+      <label for="recordatorios">Quiero recibir recordatorios de vacunas por email</label>
+    </span>
+  </div>
+  <button type="submit" [disabled]="!mascotaForm.valid">Enviar formulario</button>
+</form>

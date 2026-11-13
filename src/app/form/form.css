@@ -1,0 +1,14 @@
+div{
+  display: grid;
+  font-size: 1.1rem;
+}
+
+form{
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+div.alert, div.alert>div{
+  color: red;
+  font-size: 0.9rem;
+}
